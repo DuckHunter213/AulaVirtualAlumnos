@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Camera.jnlp">
+  <information>
+    <title>Camera</title>
+    <vendor>DARKE</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Camera.jar" size="42214804" download="eager" />
+    <jar href="lib\bridj-0.6.3-20130316.190111-13.jar" size="893456" download="eager" />
+    <jar href="lib\netty-3.2.3.jar" size="797931" download="eager" />
+    <jar href="lib\slf4j-api-1.7.2.jar" size="26083" download="eager" />
+    <jar href="lib\thumbnailator-0.4.2-all.jar" size="176093" download="eager" />
+    <jar href="lib\webcam-capture-0.3.10-RC7.jar" size="405753" download="eager" />
+    <jar href="lib\webcam-capture-0.3.12-20161206.184756-3.jar" size="417004" download="eager" />
+    <jar href="lib\xuggle-xuggler-5.4.jar" size="40318152" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Camera" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="laucher.SwingNodeExample"  name="Camera" />
+  <update check="always"/>
+</jnlp>
