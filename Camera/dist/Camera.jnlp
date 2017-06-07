@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Camera.jar" size="42214804" download="eager" />
+    <jar href="Camera.jar" size="42219249" download="eager" />
     <jar href="lib\bridj-0.6.3-20130316.190111-13.jar" size="893456" download="eager" />
     <jar href="lib\netty-3.2.3.jar" size="797931" download="eager" />
     <jar href="lib\slf4j-api-1.7.2.jar" size="26083" download="eager" />
