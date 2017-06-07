@@ -1,0 +1,3 @@
+enum SpeechDirection{
+    LEFT, RIGHT
+}

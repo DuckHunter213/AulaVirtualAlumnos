@@ -4,10 +4,10 @@ import us.sosia.video.stream.agent.StreamServer;
 
 public class Servidor {
 
-    StreamServer streamServer;
-    
     public Servidor(String host,int port) {
-        streamServer = new StreamServer(host,port);
-        streamServer.correrServidor();
+        String[] args = new String[2];
+        args[0] = host;
+        args[1] = String.valueOf(port);
+        StreamServer.main(args);
     }
 }

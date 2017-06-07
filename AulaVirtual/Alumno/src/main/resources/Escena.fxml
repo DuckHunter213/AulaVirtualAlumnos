@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerEscena">
+   <children>
+      <ImageView fitHeight="700.0" fitWidth="900.0" pickOnBounds="true">
+         <image>
+            <Image url="@Imagenes/wallpaper.png" />
+         </image>
+      </ImageView>
+      <TitledPane fx:id="Diapositivas" animated="false" collapsible="false" layoutX="8.0" layoutY="5.0" prefHeight="406.0" prefWidth="604.0" style="-fx-border-color: black;" text="Diapositivas">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="381.0" prefWidth="602.0">
+               <children>
+                  <ImageView fx:id="presentacion" fitHeight="314.0" fitWidth="557.0" layoutX="20.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button layoutX="158.0" layoutY="332.0" mnemonicParsing="false" onAction="#verDiapositivaAnterior" prefHeight="30.0" prefWidth="90.0" text="Anterior">
+                     <font>
+                        <Font name="Comic Sans MS" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="258.0" layoutY="332.0" mnemonicParsing="false" onAction="#verDiapositivaActual" prefHeight="30.0" prefWidth="70.0" text="Actual">
+                     <font>
+                        <Font name="Comic Sans MS" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="338.0" layoutY="332.0" mnemonicParsing="false" onAction="#verDiapositivaSiguiente" prefHeight="30.0" prefWidth="90.0" text="Siguiente">
+                     <font>
+                        <Font name="Comic Sans MS" size="14.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="numeroDeDiapositiva" layoutX="19.0" layoutY="322.0" text="Diapositiva 1 de 11">
+                     <font>
+                        <Font name="Comic Sans MS" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="notificacion" layoutX="317.0" layoutY="323.0" prefHeight="10.0" prefWidth="10.0" text="*" textFill="RED">
+                     <font>
+                        <Font name="Calibri" size="30.0" />
+                     </font>
+                  </Label>
+                  <Pane fx:id="areaDeDibujo" layoutX="20.0" layoutY="5.0" prefHeight="314.0" prefWidth="557.0" style="-fx-border-color: black;" />
+               </children>
+            </AnchorPane>
+        </content>
+         <font>
+            <Font name="Comic Sans MS Bold" size="14.0" />
+         </font>
+      </TitledPane>
+      <Label fx:id="descargando" layoutX="207.0" layoutY="105.0" text="Descargando Dispositivas">
+         <font>
+            <Font name="Comic Sans MS" size="21.0" />
+         </font>
+      </Label>
+      <ProgressIndicator fx:id="Indicador" layoutX="271.0" layoutY="155.0" prefHeight="96.0" prefWidth="100.0" progress="0.74" />
+      <TableView fx:id="tablaDeUsuarios" layoutX="643.0" layoutY="245.0" prefHeight="439.0" prefWidth="248.0" tableMenuButtonVisible="true">
+        <columns>
+          <TableColumn fx:id="columnaNombre" prefWidth="240.0" text="Lista de Alumnos " />
+        </columns>
+      </TableView>
+      <TitledPane animated="false" collapsible="false" layoutX="643.0" layoutY="5.0" prefHeight="225.0" prefWidth="247.0" text="Video">
+         <font>
+            <Font name="Comic Sans MS Bold" size="14.0" />
+         </font>
+         <content>
+            <VBox fx:id="panelVideo" prefHeight="200.0" prefWidth="100.0" />
+         </content>
+      </TitledPane>
+      <TitledPane animated="false" collapsible="false" layoutX="78.0" layoutY="422.0" prefHeight="261.0" prefWidth="453.0" text="Chat Global">
+        <content>
+          <AnchorPane fx:id="panelChat" minHeight="0.0" minWidth="0.0" prefHeight="205.0" prefWidth="451.0" />
+        </content>
+         <font>
+            <Font name="Comic Sans MS Bold" size="14.0" />
+         </font>
+      </TitledPane>
+      <ProgressIndicator fx:id="notificacionContorno" layoutX="326.0" layoutY="362.0" prefHeight="18.0" prefWidth="16.0" style="-fx-progress-color: red;" />
+   </children>
+</AnchorPane>

@@ -6,10 +6,13 @@
 package servidor;
 
 import cliente.Cliente;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
@@ -21,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -30,10 +34,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import laucher.CamaraWebPane;
 import util.FXGenerico;
 import laucher.Servidor;
-import laucher.WebCamAppLauncher;
+import org.slf4j.LoggerFactory;
+import us.sosia.video.stream.agent.StreamClient;
+import us.sosia.video.stream.agent.StreamClientAgent;
+import us.sosia.video.stream.agent.ui.VideoPanel;
+import us.sosia.video.stream.handler.StreamFrameListener;
 
 /**
  * FXML Controller class
@@ -41,6 +51,10 @@ import laucher.WebCamAppLauncher;
  * @author gerar
  */
 public class MarcoPrincipalController extends FXGenerico implements Initializable {
+
+    static VideoPanel panel = new VideoPanel();
+    private final static Dimension dimension = new Dimension(320,240);
+    protected final static org.slf4j.Logger logger = LoggerFactory.getLogger(StreamClient.class);
 
     @FXML
     private ScrollPane scrollPaneListaAlumnos;
@@ -80,17 +94,57 @@ public class MarcoPrincipalController extends FXGenerico implements Initializabl
         } catch (InterruptedException ex) {
             Logger.getLogger(MarcoPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //CamaraWebPane mejoras = new CamaraWebPane("localhost", 8081); //NAH, IGNÓRALO
-        //this.panelVideo.getChildren().add(mejoras); //AQUÍ ESTOY HACIENDO ALGO ASÍ PERO SEPARADO :/
+
+        
+        final SwingNode swingNode = new SwingNode();
+        createAndSetSwingContent(swingNode);
+        
+        panelVideo.getChildren().add(swingNode); //AQUÍ ESTOY HACIENDO ALGO ASÍ PERO SEPARADO :/
+
+        
+
         //Así recibe el mensaje de los alumnos
         cliente();
+    }
+
+    private void createAndSetSwingContent(final SwingNode swingNode) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JPanel panel2 = new JPanel();
+                panel2.setSize(dimension);
+                panel2.setPreferredSize(dimension);
+
+                logger.info("setup dimension :{}", dimension);
+                StreamClientAgent clientAgent = new StreamClientAgent(new StreamFrameListenerIMPL(), dimension);
+                clientAgent.connect(new InetSocketAddress("localhost", 20000));
+
+                panel.setSize(dimension);
+                panel.setPreferredSize(dimension);
+
+                panel2.add(panel);
+                swingNode.setContent(panel2);
+
+            }
+        });
+    }
+
+    protected static class StreamFrameListenerIMPL implements StreamFrameListener {
+
+        private volatile long count = 0;
+
+        @Override
+        public void onFrameReceived(BufferedImage image) {
+            logger.info("frame received :{}", count++);
+            panel.updateImage(image);
+        }
     }
 
     private static Thread iniciarTransmisionVideo() {
         return new Thread() {
             @Override
             public void run() {
-                laucher.Servidor video = new Servidor("localhost", 8081);
+                laucher.Servidor video = new Servidor("localhost", 20000);
             }
         };
     }
